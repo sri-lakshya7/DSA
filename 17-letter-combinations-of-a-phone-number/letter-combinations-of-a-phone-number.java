@@ -1,20 +1,22 @@
 class Solution {
     public List<String> letterCombinations(String digits) {
         List<String> resList = new ArrayList<>();
-        helper(digits, 0, "", resList);
+        helper(digits, 0, new StringBuilder(), resList);
 
         return resList;
     }
 
-    private void helper(String dig, int i, String prev, List<String> lst) {
+    private void helper(String dig, int i, StringBuilder prev, List<String> lst) {
         if (i == dig.length()) {
-            lst.add(prev);
+            lst.add(prev.toString());
             return;
         }
 
         char ch = dig.charAt(i);
         for (int j = 0; j < numMap(ch).length(); j++) {
-            helper(dig, i+1, prev + numMap(ch).charAt(j), lst);
+            prev.append(numMap(ch).charAt(j));
+            helper(dig, i+1, prev, lst);
+            prev.deleteCharAt(prev.length()-1);
         }
     }
 
