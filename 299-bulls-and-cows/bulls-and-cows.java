@@ -1,36 +1,20 @@
 class Solution {
     public String getHint(String secret, String guess) {
-        HashMap<Character, HashSet<Integer>> map = new HashMap<>();
-        for (int i = 0; i < secret.length(); i++) {
-            char ch = secret.charAt(i);
-            HashSet<Integer> set = map.getOrDefault(ch, new HashSet<Integer>());
-            set.add(i);
-            map.put(ch, set);
-        }
-        int x = 0, y = 0;
-        boolean[] check = new boolean[secret.length()];
+        int x = 0, y = 0, n = secret.length();
+        int[] sec = new int[10], gue = new int[10];
 
-        for (int i = 0; i < guess.length(); i++) {
-            char ch = guess.charAt(i);
-            if (map.containsKey(ch) && map.get(ch).contains(i)) {
+        for (int i = 0; i < n; i++) {
+            if (secret.charAt(i) == guess.charAt(i)) {
                 x++;
-                check[i] = true;
-                map.get(ch).remove(i);
+            } else {
+                gue[guess.charAt(i) - '0']++;
+                sec[secret.charAt(i) - '0']++;
             }
         }
-
-        for (int i = 0; i < guess.length(); i++) {
-            char ch = guess.charAt(i);
-            if (!check[i] && map.containsKey(ch) && map.get(ch).size() != 0) {
-                y++;
-                Iterator<Integer> it = map.get(ch).iterator();
-                if (it.hasNext()) {
-                    it.next();
-                    it.remove();
-                }
-            }
+        for (int i = 0; i < 10; i++) {
+            y += Math.min(sec[i], gue[i]);
         }
 
-        return new StringBuilder().append(x).append("A").append(y).append("B").toString();
+        return new StringBuilder().append("" + x + "A" + y + "B").toString();
     }
 }
