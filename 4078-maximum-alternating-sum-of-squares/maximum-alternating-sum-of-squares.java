@@ -4,7 +4,6 @@ class Solution {
         Arrays.sort(nums);
         long sum = 0;
         int n = nums.length, i = 0, j = n-1;
-        // if (n%2==1) n--;
 
         while (i < j) {
             sum -= (long)nums[i] * nums[i++];
