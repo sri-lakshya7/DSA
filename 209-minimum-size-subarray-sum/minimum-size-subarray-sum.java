@@ -7,7 +7,7 @@ class Solution {
             if (sum >= target) {
                 min = Math.min(min , right-left+1);
                 sum -= nums[left++];
-            } else if (sum < target) {
+            } else {
                 right++;
                 if (right == nums.length) break;
                 sum += nums[right];
