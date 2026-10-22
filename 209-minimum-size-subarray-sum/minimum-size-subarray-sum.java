@@ -5,7 +5,9 @@ class Solution {
 
         while (left < nums.length) {
             if (sum >= target) {
-                min = Math.min(min , right-left+1);
+                // min = Math.min(min , right-left+1);
+                int tempMin = right-left+1;
+                if (min > tempMin) min = tempMin;
                 sum -= nums[left++];
             } else {
                 right++;
