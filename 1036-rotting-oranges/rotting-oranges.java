@@ -11,7 +11,7 @@ class Solution {
             }
         }
 
-        if (zero == grid.length * grid[0].length) return 0;
+        if (zero == grid.length * grid[0].length || fresh == 0) return 0;
 
         int time = -1;
         while (!q.isEmpty()) {
