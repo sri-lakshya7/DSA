@@ -7,7 +7,7 @@ class Solution {
                 if (grid[i][j] == 0) {
                     grid[i][j] = 2;
                     if (isClosed(grid, i, j)) count++;
-                    System.out.println(i + " " + j);
+                    // System.out.println(i + " " + j);
                 }
             }
         }
