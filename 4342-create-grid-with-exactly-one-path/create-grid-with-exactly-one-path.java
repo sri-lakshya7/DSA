@@ -3,12 +3,12 @@ class Solution {
         String[] str = new String[m];
 
         for (int i = 0; i < m; i++) {
-            StringBuilder sb = new StringBuilder();
+            char[] arr = new char[n];
             for (int j = 0; j < n; j++) {
-                if (i == 0 || j == n-1) sb.append('.');
-                else sb.append('#');
+                if (i == 0 || j == n-1) arr[j] = '.';
+                else arr[j] = '#';
             }
-            str[i] = sb.toString();
+            str[i] = new String(arr);
         }
 
         return str;
