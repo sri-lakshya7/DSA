@@ -6,7 +6,6 @@ class Solution {
             num = num*10 + temp%10;
             temp /= 10;
         }
-
         return x == num;
     }
 }
