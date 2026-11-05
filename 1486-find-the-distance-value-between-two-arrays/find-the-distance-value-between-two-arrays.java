@@ -4,7 +4,10 @@ class Solution {
         for (int i = 0; i < arr1.length; i++) {
             boolean check = true;
             for (int j = 0; j < arr2.length; j++) {
-                if (Math.abs(arr1[i] - arr2[j]) <= d) check = false;
+                if (Math.abs(arr1[i] - arr2[j]) <= d) {
+                    check = false;
+                    break;
+                }
             }
             if (check) dis++;
         }
