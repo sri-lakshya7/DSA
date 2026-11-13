@@ -3,7 +3,7 @@ class Solution {
         if (sentence.length() == 1) return sentence;
         Trie dict = new Trie();
         for (String str: dictionary) dict.addWord(str);
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(sentence.length());
 
         int left = 0;
         for (int i = 1; i < sentence.length(); i++) {
@@ -21,11 +21,12 @@ class Solution {
         return sb.toString();
     }
     private void appendWord(StringBuilder sb, String str, int left, int right) {
-        for (int i = left; i <= right; i++) {
-            char ch = str.charAt(i);
-            sb.append(ch);
-        }
-        sb.append(" ");
+        // for (int i = left; i <= right; i++) {
+        //     char ch = str.charAt(i);
+        //     sb.append(ch);
+        // }
+        sb.append(str, left, right+1);
+        sb.append(' ');
     }
 
     class Trie {
@@ -47,6 +48,7 @@ class Solution {
                 char ch = str.charAt(i);
                 if (curr.children[ch-'a'] == null) curr.children[ch-'a'] = new TrieNode();
                 curr = curr.children[ch-'a'];
+                if (curr.eow) break;
             }
             curr.eow = true;
         }
