@@ -1,39 +1,39 @@
 class Solution {
     public void gameOfLife(int[][] board) {
-        int[][] res = new int[board.length][board[0].length];
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                res[i][j] = helper(board, i, j);
+            for (int j = 0; j < board[0]. length; j++) {
+                board[i][j] = countLive(board, i, j);
             }
         }
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                board[i][j] = res[i][j];
+            for (int j = 0; j < board[0]. length; j++) {
+                board[i][j] = correctBoard(board, i, j);
             }
         }
     }
 
-    private int helper(int[][] old, int i, int j) {
+    private int countLive(int[][] board, int i, int j) {
         int sum = 0;
-        sum += isLive(old, i-1, j-1);
-        sum += isLive(old, i-1, j);
-        sum += isLive(old, i-1, j+1);
-        sum += isLive(old, i, j-1);
-        sum += isLive(old, i, j+1);
-        sum += isLive(old, i+1, j-1);
-        sum += isLive(old, i+1, j);
-        sum += isLive(old, i+1, j+1);
-        
-        if (old[i][j] == 0) {
-            if (sum == 3) return 1;
-            return 0;
+        sum += isLive(board, i-1, j-1);
+        sum += isLive(board, i-1, j);
+        sum += isLive(board, i-1, j+1);
+        sum += isLive(board, i, j-1);
+        sum += isLive(board, i, j+1);
+        sum += isLive(board, i+1, j-1);
+        sum += isLive(board, i+1, j);
+        sum += isLive(board, i+1, j+1);
+        if (board[i][j] == 0) {
+            if (sum == 3) sum = 2;
+            else sum = 0;
         }
-
-        if (sum < 2 || sum > 3) return 0;
-        return 1;
+        return (sum*10 + board[i][j]);
     }
-    private int isLive(int[][] old, int i, int j) {
-        if (i < 0 || j < 0 || i == old.length || j == old[0].length) return 0;
-        return old[i][j];
+    private int isLive(int[][] board, int i, int j) {
+        if (i < 0 || j < 0 || i >= board.length || j >= board[0].length) return 0;
+        return board[i][j]%10;
+    }
+    private int correctBoard(int[][] board, int i, int j) {
+        if (board[i][j]/10 < 2 || board[i][j]/10 > 3) return 0;
+        return 1;
     }
 }
