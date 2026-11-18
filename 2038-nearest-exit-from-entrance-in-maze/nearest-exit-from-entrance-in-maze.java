@@ -9,9 +9,9 @@ class Solution {
             for (int i = 0; i < len; i++) {
                 int[] cords = q.poll();
                 int x = cords[0], y = cords[1];
-                if (x < 0 || y < 0 || x >= maze.length || y >= maze[0].length) continue;
+                // if (x < 0 || y < 0 || x >= maze.length || y >= maze[0].length) continue;
                 
-                if (maze[x][y] == '+' || maze[x][y] == '*') continue;
+                // if (maze[x][y] == '+' || maze[x][y] == '*') continue;
                 maze[x][y] = '*';
 
                 if (x == 0 || y == 0 || x+1 == maze.length || y+1 == maze[0].length) {
@@ -19,13 +19,20 @@ class Solution {
                     return level;
                 }
 
-                q.offer(new int[]{x+1, y});
-                q.offer(new int[]{x-1, y});
-                q.offer(new int[]{x, y-1});
-                q.offer(new int[]{x, y+1});
+                validate(maze, q, x+1, y);
+                validate(maze, q, x-1, y);
+                validate(maze, q, x, y-1);
+                validate(maze, q, x, y+1);
             }
             level++;
         }
         return (-1);
+    }
+
+    private void validate(char[][] maze, Queue<int[]> q, int x, int y) {
+        if (x < 0 || y < 0 || x >= maze.length || y >= maze[0].length || maze[x][y] == '+' || maze[x][y] == '*') return;
+
+        q.offer(new int[]{x, y});
+        maze[x][y] = '*';
     }
 }
