@@ -4,21 +4,15 @@ class Solution {
         boolean[] keyCheck = new boolean[rooms.size()];
         keyCheck[0] = true;
         int visitedCount = 1;
-        for (int i = 0; i < rooms.get(0).size(); i++) {
-            List<Integer> lst = rooms.get(0);
-            q.offer(lst.get(i));
-        }
+        q.offer(0);
 
         while(!q.isEmpty()) {
-            int key = q.poll();
-            if (!keyCheck[key]) {
-                keyCheck[key] = true;
-                visitedCount++;
-                List<Integer> lst = rooms.get(key);
-                for(int i: lst) {
-                    if (!keyCheck[i]) {
-                        q.offer(i);
-                    }
+            int curr = q.poll();
+            for (int key: rooms.get(curr)) {
+                if (!keyCheck[key]) {
+                    keyCheck[key] = true;
+                    visitedCount++;
+                    q.offer(key);
                 }
             }
         }
