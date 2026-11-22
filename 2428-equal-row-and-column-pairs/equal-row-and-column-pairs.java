@@ -1,26 +1,16 @@
 class Solution {
     public int equalPairs(int[][] grid) {
-        HashMap<String, Integer> map = new HashMap<>();
-        for (int i =0; i < grid.length; i++) {
-            StringBuilder sb = new StringBuilder(grid.length * 4);
-            for (int j = 0; j < grid[i].length; j++) {
-                sb.append(grid[i][j]).append(',');
-            }
-            String str = sb.toString();
-            map.put(str, map.getOrDefault(str, 0)+1);
-        }
+        int[][] newGrid = new int[grid.length][grid.length];
+        for (int i = 0; i < grid.length; i++)
+            for (int j = 0; j < grid.length; j++)
+                newGrid[i][j] = grid[j][i];
+        
         int pairs = 0;
-
-        for (int j = 0; j < grid[0].length; j++) {
-            StringBuilder sb = new StringBuilder(grid.length * 4);
-            for (int i = 0; i < grid.length; i++) {
-                sb.append(grid[i][j]).append(',');
-            }
-            String str = sb.toString();
-            if (map.containsKey(str) && map.get(str) > 0)
-                pairs+=map.getOrDefault(str,0);
-        }
-
+        for (int[] row: grid)
+            for (int[] col: newGrid)
+                if (Arrays.equals(row, col))
+                    pairs++;
+        
         return pairs;
     }
 }
