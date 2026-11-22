@@ -2,7 +2,7 @@ class Solution {
     public int equalPairs(int[][] grid) {
         HashMap<String, Integer> map = new HashMap<>();
         for (int i =0; i < grid.length; i++) {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(grid.length * 4);
             for (int j = 0; j < grid[i].length; j++) {
                 sb.append(grid[i][j]).append(',');
             }
@@ -12,7 +12,7 @@ class Solution {
         int pairs = 0;
 
         for (int j = 0; j < grid[0].length; j++) {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder(grid.length * 4);
             for (int i = 0; i < grid.length; i++) {
                 sb.append(grid[i][j]).append(',');
             }
